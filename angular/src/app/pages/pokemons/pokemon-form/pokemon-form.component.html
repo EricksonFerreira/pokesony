@@ -1,0 +1,64 @@
+<app-bred-crumb [items]="[{text: 'Pokemons', link: '/tipos'}, {text: pageTitle}]"></app-bred-crumb>
+
+<app-page-header [page-title]=" pageTitle " button-text="<< Voltar" button-link="/tipos" button-class="btn-light">
+</app-page-header>
+
+
+<form [formGroup]="resourceForm" (submit)="submitForm()">
+  <div class="card">
+    <div class="card-header">
+      Informações sobre o tipo
+    </div>
+    <div class="card-body">
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="nome">Nome</label>
+          <input type="text" class="form-control" id="nome" formControlName="nome">
+
+          <app-form-field-error [form-control]="resourceForm.get('nome')"></app-form-field-error>
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="tipos?.length">
+          <div class="row">
+            <div class="col-6">
+                <h5>Pokemons Fracos</h5>
+                  <tr *ngFor="let tipo of tipos">
+                    <input  class="form-check-input"
+                            formArrayName="tipo_fraco"
+                            type="checkbox"
+                            (change)="onCheckboxChange($event,'tipo_fraco')"
+                            [value]="tipo.id"
+                            id="tipo_fraco-{{tipo.id}}">{{tipo.nome}}
+                  </tr>
+            </div>
+            <div class="col-6">
+                <h5>Pokemons Fortes</h5>
+                <tr *ngFor="let tipo of tipos;let i=index">
+                  <input
+                          formArrayName="tipo_forte"
+                          type="checkbox"
+                          (change)="onCheckboxChange($event,'tipo_forte')"
+                          [value]="tipo.id"
+                          id="tipo_forte-{{tipo.id}}">{{tipo.nome}}
+                </tr>
+            </div>
+          </div>
+      </div>
+
+
+
+      <!-- <div class="form-group col-md-8">
+                    <label for="description">Descrição</label>
+                    <input type="text" class="form-control" id="description" formControlName="description">
+                </div> -->
+      <!-- </div> -->
+    </div>
+  </div>
+
+  <app-server-error-messages [server-error-messages]="serverErrorMessages"></app-server-error-messages>
+
+
+  <button [disabled]="submittingForm || resourceForm.invalid" type="submit"
+    class="btn btn-primary btn-lg float-right mt-3">Salvar</button>
+</form>
