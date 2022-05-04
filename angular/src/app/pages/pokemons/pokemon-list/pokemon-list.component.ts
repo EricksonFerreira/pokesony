@@ -6,15 +6,15 @@ import { Pokemon } from '../shared/pokemon.model';
 import { PokemonService } from '../shared/pokemon.service';
 
 @Component({
-  selector: 'app-tipo-list',
-  templateUrl: './tipo-list.component.html',
-  styleUrls: ['./tipo-list.component.css']
+  selector: 'app-pokemon-list',
+  templateUrl: './pokemon-list.component.html',
+  styleUrls: ['./pokemon-list.component.css']
 })
 export class PokemonListComponent extends BaseResourceListComponent<Pokemon> {
 
 
-  constructor(private tipoService: PokemonService) {
-    super(tipoService);
+  constructor(private pokemonService: PokemonService) {
+    super(pokemonService);
    }
 
 }

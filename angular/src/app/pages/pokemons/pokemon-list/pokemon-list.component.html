@@ -1,10 +1,10 @@
 <app-bred-crumb
-  [items]="[{text: 'Tipos'}]"
+  [items]="[{text: 'Pokemons'}]"
 ></app-bred-crumb>
 
 <app-page-header
-  page-title ="Tipos"
-  button-text = "+ Novo Tipo"
+  page-title ="Pokemons"
+  button-text = "+ Novo Pokemon"
   button-link = "new"
   button-class = "btn-success"
 ></app-page-header>
@@ -13,18 +13,26 @@
     <thead>
         <tr class="bg-primary text-light">  <!-- bg significa background -->
             <th>Nome</th>
+            <th>Tipo</th>
+            <th>Treinador</th>
             <th>Ações</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let tipo of resources">
+        <tr *ngFor="let pokemon of resources">
             <td>
-                <strong>{{tipo.nome}}</strong><br>
-                <!-- <small>{{tipo.description}}</small> -->
+              <strong>{{pokemon.nome}}</strong><br>
+            </td>
+              <td>
+                <strong>{{pokemon.tipo.nome}}</strong><br>
+              </td>
+                <td>
+                <strong>{{pokemon.treinador.nome}}</strong><br>
+                <!-- <small>{{pokemon.description}}</small> -->
             </td>
             <td>
-                <a [routerLink]="[tipo.id, 'edit']" class="btn btn-outline-info btn-sm mr-2">Editar</a>
-                <button (click)="deleteResource(tipo)" class="btn btn-outline-danger btn-sm">Excluir</button>
+                <a [routerLink]="[pokemon.id, 'edit']" class="btn btn-outline-info btn-sm mr-2">Editar</a>
+                <button (click)="deleteResource(pokemon)" class="btn btn-outline-danger btn-sm">Excluir</button>
             </td>
         </tr>
     </tbody>

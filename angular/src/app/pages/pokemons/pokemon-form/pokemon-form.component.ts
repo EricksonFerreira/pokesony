@@ -5,36 +5,48 @@ import { BaseResourceFormComponent } from '../../../shared/components/base-resou
 
 import { Pokemon } from '../shared/pokemon.model';
 import { PokemonService } from '../shared/pokemon.service';
+import { TreinadorService } from '../../treinadores/shared/treinador.service';
+import { TipoService } from '../../tipos/shared/tipo.service';
+import { Treinador } from '../../treinadores/shared/treinador.model';
+import { Tipo } from '../../tipos/shared/tipo.model';
 
 @Component({
-  selector: 'app-tipo-form',
-  templateUrl: './tipo-form.component.html',
-  styleUrls: ['./tipo-form.component.css']
+  selector: 'app-pokemon-form',
+  templateUrl: './pokemon-form.component.html',
+  styleUrls: ['./pokemon-form.component.css']
 })
 
 export class PokemonFormComponent extends BaseResourceFormComponent<Pokemon> {
-  tipos: Pokemon[] = [];
+  treinadores: Treinador[] = [];
+  tipos: Tipo[] = [];
   constructor(
-    protected tipoService: PokemonService,
+    protected pokemonService: PokemonService,
+    protected treinadorService: TreinadorService,
+    protected tipoService: TipoService,
     protected injector: Injector,
-    private fb: FormBuilder
   ) {
 
 
-    super(injector, new Pokemon(), tipoService, Pokemon.fromJson);
+    super(injector, new Pokemon(), pokemonService, Pokemon.fromJson);
+
+    this.treinadorService.getAll().subscribe(
+      resources =>{
+        this.treinadores = resources.sort((a, b) => b.id - a.id)
+    },
+      error => alert('Error ao carregar a lista de treinadores')
+    );
 
     this.tipoService.getAll().subscribe(
       resources =>{
         this.tipos = resources.sort((a, b) => b.id - a.id)
-        console.log(this.tipos)
     },
-      error => alert('Error ao carregar a lista')
+      error => alert('Error ao carregar a lista de tipos')
     );
 
-      this.resourceForm = this.fb.group({
-        tipo_fraco: this.fb.array([]),
-        tipo_forte: this.fb.array([])
-      })
+      // this.resourceForm = this.fb.group({
+      //   pokemon_fraco: this.fb.array([]),
+      //   pokemon_forte: this.fb.array([])
+      // })
    }
 
   // Deixa os campos do formulário vazios
@@ -42,29 +54,9 @@ export class PokemonFormComponent extends BaseResourceFormComponent<Pokemon> {
     this.resourceForm = this.formBuilder.group({
       id: [null],
       nome: [null, [Validators.required, Validators.minLength(2)]],
-      tipo_fraco: [[]],
-      tipo_forte: [[]]
+      treinador_id: [null],
+      tipo_id: [null]
     });
-  }
-
-
-  onCheckboxChange(e,tipo) {
-    const checkArray = this.resourceForm.get(tipo).value == undefined ? [] : this.resourceForm.get(tipo).value;
-
-    const valor = isNaN(e.target.value) ? e.target.value : Number(e.target.value)
-console.log(checkArray)
-    if (e.target.checked) {
-      checkArray.push(valor);
-    } else {
-      let i: number = 0;
-      checkArray.forEach((item) => {
-        if (item.id == e.target.value) {
-          checkArray.splice(i,1);
-          return;
-        }
-        i++;
-      });
-    }
   }
 
   protected creationPageTitle(): string {

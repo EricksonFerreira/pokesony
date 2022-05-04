@@ -54,7 +54,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
 
   // Métodos protegidos
 
-  // Verifica se é a pagina de editar ou de nova categoria
+  // Verifica se é a pagina de editar ou de novo tipo
   protected setCurrentAction() {
     if (this.route.snapshot.url[0].path === 'new') {
       this.currentAction = 'new';
@@ -63,11 +63,17 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     }
   }
 
-  // Caso o formulário seja de edição, preenche os dados do mesmo com os dados da categoria
+  // Caso o formulário seja de edição, preenche os dados do mesmo com os dados do tipo
   protected loadResource() {
     if (this.currentAction === 'edit') {
       this.route.paramMap.pipe(
-        switchMap(params => this.resourceService.getById(+params.get('id')))
+        switchMap(params => {
+          if(this.resource.constructor.name == 'Tipo'){
+            return this.resourceService.getById(+params.get('id'))
+          }else{
+            return this.resourceService.getById(+params.get('id'))
+          }
+        })
       )
       .subscribe(
         (resource) => {
@@ -79,7 +85,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
     }
   }
 
-  // Prevenção de mostrar o null no titulo da categoria quando a pagina demorar para carregar
+  // Prevenção de mostrar o null no titulo do tipo quando a pagina demorar para carregar
   protected setPageTitle() {
     if (this.currentAction === 'new') {
       this.pageTitle = this.creationPageTitle();
@@ -98,6 +104,7 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
 
   protected createResource() {
     const resource: T = this.jsonDataToResourceFn(this.resourceForm.value);
+    console.log(resource)
     this.resourceService.create(resource)
     .subscribe(
       resource => this.actionsForSuccess(resource),
