@@ -1,9 +1,71 @@
 # PokeSony
 
+<!-- CONTEÚDOS -->
+<details >
+  <summary>Conteúdos</summary>
+  <ol>
+    <li>
+      <a href="#explicação-do-projeto">Explicação do projeto</a>
+    </li>
+    <li>
+      <a href="#tecnologias-utilizadas">Técnologias utilizadas</a>
+    </li>
+    <li>
+        <a href="#iniciar-projeto">Iniciar projeto</a>
+        <ul>
+            <li><a href="#requisitos">Requisitos</a></li>
+            <li><a href="#rodando-os-projetos">Rodando o projeto</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#api-em-java">Api em Java</a>
+        <ul>
+            <li><a href="#organizacao-das-pastas-da-api">Organização das pastas da api</a></li>
+            <li><a href="#padroes-utilizados-na-api">Padrões utilizados na api</a></li>
+            <li><a href="#explicacao-da-api">Explicação da Api</a></li>
+        </ul>
+    </li>
+    <li>
+        <a href="#aplicação-em-angular">Front-end Angular</a>
+        <ul>
+            <li><a href="#organizacao-das-pastas-do-angular">Organização das pastas do angular</a></li>
+            <li><a href="#padroes-utilizados-no-angular">Padrões utilizados no angular</a></li>
+            <li><a href="#explicacao-de-alguns-componentes-do-angular">Explicação de alguns componentes do angular</a></li>
+        </ul>
+    </li>
+    <li><a href="#licenca">Licença</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ol>
+</details>
+
+
+
+<!-- EXPLICAÇÃO DO PROJETO -->
+## Explicação do projeto
+Esse projeto foi desenvolvido por Erickson Ferreira, aluno da disciplina de topícos avançados da web ministrada pelo prof. Ranieri Valença. O intuito desse projeto foi utilizar técnologias que não tinha muito conhecimento e desenvolver uma aplicação funcional com boas práticas.
+<!-- TECNOLOGIAS UTILIZADAS -->
+## Tecnologias utilizadas
+Serão listadas abaixo as principais técnologias utilizadas no projeto: 
+* [Angular](https://angular.io/)
+* [Spring Boot](https://spring.io/)
+* [Bootstrap](https://getbootstrap.com/)
+<!-- INICIAR PROJETO -->
+## Iniciar projeto
+<!-- REQUISITOS -->
+### Requisitos
+<!-- RODANDO OS PROJETOS -->
+### Rodando os projetos
+
+<!-- INICIAR PROJETO -->
+## API em java
+<!-- ORGANIZAÇÃO -->
+### Organização das pastas da API
+<!--PADRÕES API -->
+### Padrões utilizados na API
+<!--EXPLICAÇÃO API -->
+### Explicação da API
+
 [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=pokesony&uri=https%3A%2F%2Fgithub.com%2FEricksonFerreira%2Fpokesony%2Fblob%2Fmain%2Fexport.json)
-
-
-As dúvidas e solicitações, relacionadas ao acesso da API, devem ser enviadas para o e-mail erickson.ferreira@outlook.com.br
 
 Recursos disponíveis para acesso via API:
 
@@ -11,7 +73,7 @@ Recursos disponíveis para acesso via API:
 - [**Treinador**](#treinador)
 - [**Tipo**](#tipo)
 
-## Métodos
+#### Métodos
 
 Requisições para a API devem seguir os padrões:
 | Método | Descrição |
@@ -21,20 +83,20 @@ Requisições para a API devem seguir os padrões:
 | `PUT` | Atualiza dados de um registro ou altera sua situação. |
 | `DELETE` | Remove um registro do sistema. |
 
-## Respostas
+#### Respostas
 
 | Código | Descrição                                                          |
 | ------ | ------------------------------------------------------------------ |
 | `200`  | Requisição executada com sucesso (success).                        |
 | `400`  | Erros de validação ou os campos informados não existem no sistema. |
 
-# Group Recursos
+### Grupo dos Recursos
 
-# Login [/login]
+#### Login [/login]
 
 Login dos usuarios do sistema.
 
-### login [POST]
+#### login [POST]
 
 - Attributes (object)
 
@@ -60,7 +122,7 @@ Login dos usuarios do sistema.
             "prefix": "Berear"
           }
 
-### Tabela das rotas
+#### Tabela das rotas
 | Método | URL
 |--- |--- |
 | `GET` | `/api/pokemon` 
@@ -79,11 +141,11 @@ Login dos usuarios do sistema.
 | `PUT` | `/api/tipo/{id}`
 | `DELETE` | `/api/tipo/{id}` 
 
-# Tipo [/tipo]
+### Tipo [/tipo]
 
 Os tipos da aplicação.
 
-### Listar (List) [GET /tipo/{id}]
+#### Listar (List) [GET /tipo/{id}]
 
 - Parameters
 
@@ -109,7 +171,7 @@ Os tipos da aplicação.
             }
 
 
-### Novo (Create) [POST]
+#### Novo (Create) [POST]
 
 - Attributes (object)
 
@@ -129,7 +191,7 @@ Os tipos da aplicação.
 
 - Response 200 (application/json)           
 
-### Editar (Update) [PUT /tipo/{codigo}]
+#### Editar (Update) [PUT /tipo/{codigo}]
 
 - Request (application/json)
 
@@ -149,7 +211,7 @@ Os tipos da aplicação.
             "nome": "Fogarel"
         }
 
-### Remover (Delete) [DELETE /tipo/{codigo}]
+#### Remover (Delete) [DELETE /tipo/{codigo}]
 
 - Parameters
 
@@ -157,11 +219,11 @@ Os tipos da aplicação.
 
 - Response 200 (application/json)
 
-# Treinador [/treinador]
+### Treinador [/treinador]
 
 Os treinadors da aplicação.
 
-### Listar (List) [GET /treinador/{id}]
+#### Listar (List) [GET /treinador/{id}]
 
 - Parameters
 
@@ -175,7 +237,7 @@ Os treinadors da aplicação.
         }
 
 
-### Novo (Create) [POST]
+#### Novo (Create) [POST]
 
 - Attributes (object)
 
@@ -199,7 +261,7 @@ Os treinadors da aplicação.
                 "nome": "Hugh",
             }
 
-### Editar (Update) [PUT /treinador/{codigo}]
+#### Editar (Update) [PUT /treinador/{codigo}]
 
 - Request (application/json)
 
@@ -219,7 +281,7 @@ Os treinadors da aplicação.
             "nome": "Ashe",
         }
 
-### Remover (Delete) [DELETE /treinador/{codigo}]
+#### Remover (Delete) [DELETE /treinador/{codigo}]
 
 - Parameters
 
@@ -227,11 +289,11 @@ Os treinadors da aplicação.
 
 - Response 200 (application/json)
 
-# Pokemon [/pokemon]
+### Pokemon [/pokemon]
 
 Os pokemons da aplicação.
 
-### Listar (List) [GET /pokemon/{id}]
+#### Listar (List) [GET /pokemon/{id}]
 
 - Parameters
 
@@ -254,7 +316,7 @@ Os pokemons da aplicação.
           ]
 
 
-### Novo (Create) [POST]
+#### Novo (Create) [POST]
 
 - Attributes (object)
 
@@ -292,7 +354,7 @@ Os pokemons da aplicação.
                 }
             }
 
-### Editar (Update) [PUT /pokemon/{codigo}]
+#### Editar (Update) [PUT /pokemon/{codigo}]
 
 - Request (application/json)
 
@@ -324,11 +386,33 @@ Os pokemons da aplicação.
             }
         }
 
-### Remover (Delete) [DELETE /pokemon/{codigo}]
+#### Remover (Delete) [DELETE /pokemon/{codigo}]
 
 - Parameters
 
   - id (number, required) - codigo do pokemon
 
 - Response 200 (application/json)
+
+<!-- INICIAR PROJETO -->
+## Aplicação em angular
+<!-- ORGANIZAÇÃO -->
+### Organização das pastas do angular
+<!--PADRÕES API -->
+### Padrões utilizados no angular
+<!--EXPLICAÇÃO API -->
+### Explicação de alguns componentes do angular
+
+<!--LICENÇA -->
+## Licença
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<!--CONTATO -->
+## Contato
+
+Github: [https://github.com/ericksonferreira](https://github.com/ericksonferreira)
+
+LinkedIn: [https://www.linkedin.com/in/erickson-ferreira-627202174/](https://www.linkedin.com/in/erickson-ferreira-627202174/)
+
+
 
