@@ -13,7 +13,6 @@
     <li>
         <a href="#iniciar-projeto">Iniciar projeto</a>
         <ul>
-            <li><a href="#requisitos">Requisitos</a></li>
             <li><a href="#rodando-os-projetos">Rodando o projeto</a></li>
         </ul>
     </li>
@@ -33,7 +32,7 @@
             <li><a href="#explicacao-de-alguns-componentes-do-angular">Explicação de alguns componentes do angular</a></li>
         </ul>
     </li>
-    <li><a href="#licenca">Licença</a></li>
+    <li><a href="#licença">Licença</a></li>
     <li><a href="#contato">Contato</a></li>
   </ol>
 </details>
@@ -53,8 +52,7 @@ Serão listadas abaixo as principais técnologias utilizadas no projeto:
 ## Iniciar projeto
 <!-- RODANDO OS PROJETOS -->
 ### Rodando os projetos
-Baixe o Node e o instale: https://nodejs.org/en/download/
-Depois abra o terminal na pasta desejada e digite os seguintes comando:
+###### Baixe o Node e o instale: https://nodejs.org/en/download/ <br> Depois abra o terminal na pasta desejada e digite os seguintes comando:
  ```
  git clone https://github.com/EricksonFerreira/pokesony.git
 cd pokesony
@@ -63,10 +61,10 @@ npm install
 npm start
  ```
 
-Após instale a ide intelliJ e o instale: https://www.jetbrains.com/pt-br/idea/download/#section=windows
-Abra o projeto na pasta java
+###### Após instale a ide intelliJ e o instale: https://www.jetbrains.com/pt-br/idea/download/#section=windows <br> Abra o projeto na pasta java
 <img src="images_readme/mapa_arquivos_java.png" alt="Logo" width="300" height="150">
-Caso não tenha o jdk na versão do projeto siga esses passos para instala-la:
+
+###### Caso não tenha o jdk na versão do projeto siga esses passos para instala-la:
 <img src="images_readme/pom_xml.png" alt="Logo" width="700" height="250">
 <img src="images_readme/pass_1.png" alt="Logo" width="620" height="70">
 <img src="images_readme/pass_2.png" alt="Logo" width="600" height="150">
@@ -75,7 +73,7 @@ Caso não tenha o jdk na versão do projeto siga esses passos para instala-la:
 <img src="images_readme/pass_5.png" alt="Logo" width="600" height="150">
 <img src="images_readme/pass_6.png" alt="Logo" width="600" height="200">
 <img src="images_readme/pass_7.png" alt="Logo" width="800" height="400">
-
+<br>
 Agora é apenas acessar essa url: http://www.localhost:4200
 
 <!-- INICIAR PROJETO -->
