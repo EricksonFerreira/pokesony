@@ -19,17 +19,17 @@
     <li>
         <a href="#api-em-java">Api em Java</a>
         <ul>
-            <li><a href="#organizacao-das-pastas-da-api">Organização das pastas da api</a></li>
-            <li><a href="#padroes-utilizados-na-api">Padrões utilizados na api</a></li>
-            <li><a href="#explicacao-da-api">Explicação da Api</a></li>
+            <li><a href="#organização-das-pastas-da-api">Organização das pastas da api</a></li>
+            <li><a href="#padrões-utilizados-na-api">Padrões utilizados na api</a></li>
+            <li><a href="#explicação-da-api">Explicação da Api</a></li>
         </ul>
     </li>
     <li>
         <a href="#aplicação-em-angular">Front-end Angular</a>
         <ul>
-            <li><a href="#organizacao-das-pastas-do-angular">Organização das pastas do angular</a></li>
-            <li><a href="#padroes-utilizados-no-angular">Padrões utilizados no angular</a></li>
-            <li><a href="#explicacao-de-alguns-componentes-do-angular">Explicação de alguns componentes do angular</a></li>
+            <li><a href="#organização-das-pastas-do-angular">Organização das pastas do angular</a></li>
+            <li><a href="#padrões-utilizados-no-angular">Padrões utilizados no angular</a></li>
+            <li><a href="#explicação-de-alguns-componentes-do-angular">Explicação de alguns componentes do angular</a></li>
         </ul>
     </li>
     <li><a href="#licença">Licença</a></li>
@@ -78,11 +78,11 @@ Agora é apenas acessar essa url: http://www.localhost:4200
 
 <!-- INICIAR PROJETO -->
 ## API em java
-<!-- ORGANIZAÇÃO -->
+<!-- ORGANIZAÇÃO DA API-->
 ### Organização das pastas da API
-<!--PADRÕES API -->
+<!--PADRÕES DA API -->
 ### Padrões utilizados na API
-<!--EXPLICAÇÃO API -->
+<!--EXPLICAÇÃO DA API -->
 ### Explicação da API
 
 [![Run in Insomnia}](https://insomnia.rest/images/run.svg)](https://insomnia.rest/run/?label=pokesony&uri=https%3A%2F%2Fgithub.com%2FEricksonFerreira%2Fpokesony%2Fblob%2Fmain%2Fexport.json)
