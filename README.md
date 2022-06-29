@@ -8,7 +8,7 @@
       <a href="#explicação-do-projeto">Explicação do projeto</a>
     </li>
     <li>
-      <a href="#tecnologias-utilizadas">Técnologias utilizadas</a>
+      <a href="#tecnologia
     </li>
     <li>
         <a href="#iniciar-projeto">Iniciar projeto</a>
@@ -82,8 +82,207 @@ Agora é apenas acessar essa url: http://www.localhost:4200
 ## API em java
 <!-- ORGANIZAÇÃO DA API-->
 ### Organização das pastas da API
+```
+  .
+  └── java
+      ├── .mvn
+      │   └── wrapper
+      └── src
+          ├── test
+          │   └── java
+          │       └── com
+          │           └── pokemon
+          └── main
+             └── java
+                  └── com
+                      └── pokemon
+                          ├── convert
+                          │   ├── pokemon
+                          │   ├── tipo
+                          │   ├── tipooposicao
+                          │   ├── tipopokemon
+                          │   └── treinador
+                          ├── domain
+                          │   ├── pokemon
+                          │   ├── tipo
+                          │   ├── tipooposicao
+                          │   ├── tipopokemon
+                          │   └── treinador
+                          ├── dto
+                          │   ├── pokemon
+                          │   ├── statustipo
+                          │   ├── tipo
+                          │   ├── tipooposicao
+                          │   ├── tipopokemon
+                          │   └── treinador
+                          ├── repository
+                          │   ├── pokemon
+                          │   ├── tipo
+                          │   ├── tipooposicao
+                          │   ├── tipopokemon
+                          │   └── treinador
+                          ├── resource
+                          │   ├── pokemon
+                          │   ├── tipo
+                          │   └── treinador                          
+                          └── service
+                              ├── pokemon
+                              ├── tipo
+                              └── treinador                          
+```
 <!--PADRÕES DA API -->
-### Padrões utilizados na API
+### Boas práticas utilizados na API
+- #### Lombok
+  - ##### O que é o lombok
+    - É uma biblioteca java que tem como intuito remover alguns boilerplates utilizando anotações. pois a linguagem java é muito verborrágica, e o lombok acaba automatizandoque se repetem em várias classes, como getters, setters, equals, etc.
+  - ##### Porque utiliza-lo
+    - Pois utilizando o lombok acabamos não precisando utilizar os métodos getters,setters, equals, etc. Com isso a produtividade será aumentada.
+  - ##### Algumas anotações
+    - ###### @Data
+      - Essa anotação tem um poder imenso, pois ela é uma coleção de anotações. Ao utiliza-la você está utilizando algumas anotações, como:
+        -  **@Getter** - *Gera metodos getters padrões automaticamente*
+        -  **@Setter** - *Gera metodos setters padrões automaticamente*
+        -  **@RequiredArgsConstructor** - *Gera um construtor com 1 parâmetro para cada campo que requer tratamento especial*
+        -  **@ToString** - *Fará com que o lombok gere uma implementação do método toString()* 
+        -  **@EqualsAndHashCode** - *Gera implementações dos métodos equals(Object other) e hashCode()*
+      <br>
+  
+        ```java
+              pokemon.dto.tipo.TipoDto
+
+              @Data
+              public class TipoDTO implements Serializable {
+
+                  private static final long serialVersionUID = 1L;
+                  
+                  private Integer id;
+                  private String nome;
+              }
+        ```
+        É igual a: 
+
+        ```java
+
+              @Getter
+              @Setter
+              @RequiredArgsConstructor
+              @ToString
+              @EqualsAndHashCode
+              public class TipoDTO implements Serializable {
+
+                  private static final long serialVersionUID = 1L;
+                  
+                  private Integer id;
+                  private String nome;
+              }
+        ```
+
+
+
+
+    - ###### @Builder
+      - Ele é utilizado para métodos quando nos objetos da classe não quero modificar a propriedade dos atributos ou estender a classe. 
+      - Ele permite que você produza automaticamente o código necessário para que sua classe seja instanciável com código, como:
+      
+      ```java
+      pokemon.dto.tipo.TipoDto
+
+      @Data
+      @NoArgsConstructor
+      @AllArgsConstructor
+      //Aqui eu utilizei o buider no tipoDTO, com isso ao chamar o tipoDto e utilizar o método builder() e no final build()
+      @Builder
+      public class TipoDTO implements Serializable {
+
+          private static final long serialVersionUID = 1L;
+          
+          private Integer id;
+          private String nome;
+      }
+
+      pokemon.convert.tipo.TipoConvert
+ 
+      public static TipoDTO tipoDomainToDTO(Tipo domain) {
+      // Podemos observar que foi criado um objeto TipoDTO e nele tem por obrigação todos os atributos da classe pai(TipoDTO)
+        return TipoDTO.builder().id(domain.getId()).nome(domain.getNome()).build();
+      }
+    
+      ```
+
+    - ###### @NoArgsConstructor
+      - Fornece a criação de um construtor vazio
+      - Construtor vazio é utilizado quanto temos um construtor que recebe argumentos, mas esses argumentos são opcionais.
+      <br>
+      ```java
+        pokemon.dto.tipo.TipoDto
+
+        @NoArgsConstructor
+        public class TipoDTO implements Serializable {
+
+            private static final long serialVersionUID = 1L;
+            
+            private Integer id;
+            private String nome;
+        }
+      ```
+      É igual a: 
+
+      ```java
+
+        public class TipoDTO implements Serializable {
+
+          private static final long serialVersionUID = 1L;
+          
+          private Integer id;
+          private String nome;
+
+          public TipoDTO(){
+
+          }
+        }
+      ```
+
+    - ###### @AllArgsConstructor
+      - Fornece a criação de um construtor com todos os atributos
+      <br>
+      ```java
+        pokemon.dto.tipo.TipoDto
+
+        @NoArgsConstructor
+        public class TipoDTO implements Serializable {
+
+            private static final long serialVersionUID = 1L;
+            
+            private Integer id;
+            private String nome;
+        }
+      ```
+      É igual a: 
+
+      ```java
+
+        public class TipoDTO implements Serializable {
+
+          private static final long serialVersionUID = 1L;
+          
+          private Integer id;
+          private String nome;
+
+          public TipoDTO(integer id, String nome){
+            this.id = id;
+            this.nome = nome;
+          }
+        }
+      ```
+- #### Spring-data-jpa
+  - ##### O que é-data-jpa
+  - ##### Algumas anotações
+- #### Data Transfer Object (DTO) 
+  - ##### O que é Transfer Object (DTO) 
+- #### Repository
+  - ##### O que é
+- #### Hibernate
+  - ##### O que é o Hibernate
 <!--EXPLICAÇÃO DA API -->
 ### Explicação da API
 
@@ -416,11 +615,48 @@ Os pokemons da aplicação.
 
 - Response 200 (application/json)
 
-<!-- INICIAR PROJETO -->
+<!-- APLICAÇÃO EM ANGULAR -->
 ## Aplicação em angular
 <!-- ORGANIZAÇÃO -->
 ### Organização das pastas do angular
-<!--PADRÕES API -->
+```
+  .
+  └── angular
+      ├── e2e
+      │   └── src
+      └── src
+          ├── app
+          |   ├── core
+          |   |   └── components
+          |   |       └── navbar
+          |   ├── pages
+          |   |   ├── pokemons
+          |   |   |   ├── pokemon-form
+          |   |   |   ├── pokemon-list
+          |   |   |   └── shared
+          |   |   ├── tipos
+          |   |   |   ├── tipo-form
+          |   |   |   ├── tipo-list
+          |   |   |   └── shared
+          |   |   └── treinadores
+          |   |       ├── treinador-form
+          |   |       ├── treinador-list
+          |   |       └── shared
+          |   └── shared
+          |       ├── components
+          |       |   ├── base-resource-form
+          |       |   ├── base-resource-list
+          |       |   ├── bread-crumb
+          |       |   ├── form-field-error
+          |       |   ├── page-header
+          |       |   └── server-error-messages
+          |       ├── models
+          |       └── services
+          |          
+          ├── assets
+          └── environments
+```
+<!--PADRÕES ANGULAR -->
 ### Padrões utilizados no angular
 <!--EXPLICAÇÃO API -->
 ### Explicação de alguns componentes do angular
