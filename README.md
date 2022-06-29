@@ -134,12 +134,12 @@ Agora é apenas acessar essa url: http://www.localhost:4200
 ### Boas práticas utilizados na API
 - #### Lombok
   - ##### O que é o lombok
-    - É uma biblioteca java que tem como intuito remover alguns boilerplates utilizando anotações. pois a linguagem java é muito verborrágica, e o lombok acaba automatizandoque se repetem em várias classes, como getters, setters, equals, etc.
+      É uma biblioteca java que tem como intuito remover alguns boilerplates utilizando anotações. pois a linguagem java é muito verborrágica, e o lombok acaba automatizandoque se repetem em várias classes, como getters, setters, equals, etc.
   - ##### Porque utiliza-lo
-    - Pois utilizando o lombok acabamos não precisando utilizar os métodos getters,setters, equals, etc. Com isso a produtividade será aumentada.
+     Pois utilizando o lombok acabamos não precisando utilizar os métodos getters,setters, equals, etc. Com isso a produtividade será aumentada.
   - ##### Algumas anotações
     - ###### @Data
-      - Essa anotação tem um poder imenso, pois ela é uma coleção de anotações. Ao utiliza-la você está utilizando algumas anotações, como:
+      Essa anotação tem um poder imenso, pois ela é uma coleção de anotações. Ao utiliza-la você está utilizando algumas anotações, como:
         -  **@Getter** - *Gera metodos getters padrões automaticamente*
         -  **@Setter** - *Gera metodos setters padrões automaticamente*
         -  **@RequiredArgsConstructor** - *Gera um construtor com 1 parâmetro para cada campo que requer tratamento especial*
@@ -213,7 +213,8 @@ Agora é apenas acessar essa url: http://www.localhost:4200
       - Fornece a criação de um construtor vazio
       - Construtor vazio é utilizado quanto temos um construtor que recebe argumentos, mas esses argumentos são opcionais.
       <br>
-      ```java
+                                                                       
+      ``` java
         pokemon.dto.tipo.TipoDto
 
         @NoArgsConstructor
@@ -227,7 +228,7 @@ Agora é apenas acessar essa url: http://www.localhost:4200
       ```
       É igual a: 
 
-      ```java
+      ``` java
 
         public class TipoDTO implements Serializable {
 
@@ -243,9 +244,9 @@ Agora é apenas acessar essa url: http://www.localhost:4200
       ```
 
     - ###### @AllArgsConstructor
-      - Fornece a criação de um construtor com todos os atributos
+      Fornece a criação de um construtor com todos os atributos
       <br>
-      ```java
+      ``` java
         pokemon.dto.tipo.TipoDto
 
         @NoArgsConstructor
@@ -258,8 +259,7 @@ Agora é apenas acessar essa url: http://www.localhost:4200
         }
       ```
       É igual a: 
-
-      ```java
+      ``` java
 
         public class TipoDTO implements Serializable {
 
