@@ -274,15 +274,84 @@ Agora é apenas acessar essa url: http://www.localhost:4200
           }
         }
       ```
-- #### Spring-data-jpa
-  - ##### O que é-data-jpa
-  - ##### Algumas anotações
 - #### Data Transfer Object (DTO) 
-  - ##### O que é Transfer Object (DTO) 
-- #### Repository
-  - ##### O que é
+  - ##### O que é Transfer Object (DTO)
+    Data Tranfer Object é um padrão de projetos bastante usado em Java para o transporte de dados entre diferentes componentes de um sistema, diferentes instâncias ou processos de um sistema distribuído ou diferentes sistemas via serialização.
+  - ##### Vantagens e desvantagens da sua utilização
+    - ###### Vantagens
+      - Aumento a complexidade;
+      - Existe grande possibilidade do código ficar duplicado. 
+    - ###### Desvantagens
+      - Deixa explícito quais campos irão para a camada da view. Sim, existem várias anotações em diversos frameworks que indicam quais campos não irão para a visualização. Porém, caso esqueçamos de fazer as anotações, podemos exportar um campo crítico de maneira acidental como a senha do usuário;
+      - Facilita o desenho em relação a orientação de objeto. Um dos pontos que o clean code deixa claro sobre orientação a objetos é que, o POO esconde os dados para expor o comportamento e, o encapsulamento, ajuda com isso;
+      - Facilita o atualização do banco de dados. Muitas vezes é importante refatorar ou migrar o banco de dados sem que essa alteração impacte o cliente. Essa separação facilita otimizações, modificações no banco de dados sem que isso impacte a visualização;
+      - Versionamento e retrocompatibilidade são pontos importantes, principalmente, quando se tem uma API de uso público e com vários clientes, assim é possível ter um DTO para cada versão e evoluir o modelo de negócio sem se preocupar;
+  - ##### Como eu utilizei
+
+    - **Primeiro verifiquei a minha entidade e seus atributos**
+      ``` java
+      @Entity
+      public class Treinador {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer id;
+        private String nome;
+      }
+      ``` 
+    - **Depois quais valores desejo receber no formulário, pois esses valores serão os atributos da minha classe DTO**
+    ``` java
+    @PostMapping
+    public ResponseEntity<TreinadorDTO> adicionaTreinador(@RequestBody TreinadorFormDTO treinadorFormDTO){
+        TreinadorDTO treinador = treinadorService.adicionaTreinador(treinadorFormDTO);
+        return ResponseEntity.ok(treinador);
+    }
+    ```
+    - **Após saber quais atributos desejo receber no formulário, crio uma classe e coloco no fim dela o nome DTO**
+    ``` java
+    public class TreinadorFormDTO implements Serializable {
+      private static final long serialVersionUID = 1L;
+      
+      private String nome;    
+    }
+    ```
+    Podemos ver que já temos o método que será chamado quando fizer a requisição HTTP e que ao chama-lo, esse chamamento deverá trazer um objeto do tipo treinado DTO, porém não acessamos o banco de dados com os objjetos DTO, pois como vimos no inicio o DTO é um dado de transferencia e não na manipulação deles no banco. Por conta disso utilizamos o Convert, que é onde conveteremos de DTO(abstração) para uma classe concreta do objeto e assim manipularemos ele.
+    - **Fazendo a conversão de DTO para Entidade**
+    ``` java
+    public class TreinadorConvert {
+      private TreinadorConvert() {
+      }        
+      public static Treinador treinadorFormToTreinadorEntity(TreinadorFormDTO treinadorForm) {
+        return Treinador.builder().nome(treinadorForm.getNome()).build();
+      }
+    }
+    ```
+
+  - **Passo a passo exemplificado:**
+    1. Verificar quais informações desejo receber no formulario
+    2. Criar um DTO do formulário com essas informações
+    3. Criar um método resource que recebe esse DTO do formulário como parâmetro
+    4. Criar um Convert que recebe essse DTO do formulário que retorne uma entidade do objeto
+    5. Salvar essas informações no banco
+    6. Criar um DTO com as informações que deseja retorna na chamada HTTP
+    7. Na mesma classe que criou um Convert  criar um método que transforme de entidade para DTO 
+    8. Retornar esse DTO no corpo do requisição
+
 - #### Hibernate
   - ##### O que é o Hibernate
+      É uma ferramenta de mapeamento objeto-relacional( ou ORM) para java. Sua ideia é transformar o acesso a dados, em um banco de dados relacional, mais simples através da manipulação de objetos java, deixando de lado as intruções SQL empregadas em operações de CRUD. É um dos frameworks de persistência de dados mais utilizados.
+  - ##### Vantagens e desvantagens da sua utilização
+    - ###### Vantagens
+      - Como praticamente todos os ORMs, deve ser citado como grande vantagens o aumento da velocidade de desenvolvimento e facilidade na possível troca do banco de dados.
+      - Hoje em dia, essa popularidade do Hibernate pode ser um grande diferencial na escolha dele, pois possui uma comunidade maior na internet e é mais fácil de encontrar mão de obra.
+      - O suporte a múltiplos bancos de é ponto positivo para o Hibernate. Seja Oracle, MySQL, PostgreSql ou com outros o Hibernate se vira muito bem.
+      - O cache de 2º nível é para mim, uma das principais vantagens do Hibernate. Já que nos principais bancos de dados que o ORM trabalha, é praticamente indiferente para ele buscas, 10, 30 ou até 100 colunas em uma consulta.
+      - O Hibernate é Open Source (licensa LGPL).
+
+    - ###### Desvantagens
+      - A dificuldade em algumas coisas, como consultas mais complexas pode ser citado com um fator negativo para o Hibernate.
+      - Em consultas um pouco mais complexas, o Hibernate também possuí uma notória perda de desempenho. Isso é algo que pode pesar contra.
+  - ##### Como eu utilizei
+
 <!--EXPLICAÇÃO DA API -->
 ### Explicação da API
 
