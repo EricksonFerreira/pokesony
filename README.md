@@ -350,7 +350,41 @@ Agora é apenas acessar essa url: http://www.localhost:4200
     - ###### Desvantagens
       - A dificuldade em algumas coisas, como consultas mais complexas pode ser citado com um fator negativo para o Hibernate.
       - Em consultas um pouco mais complexas, o Hibernate também possuí uma notória perda de desempenho. Isso é algo que pode pesar contra.
-  - ##### Como eu utilizei
+  - ##### Algumas anotações e como foram utilizadas
+    - ###### @Entity
+      Essa anotação é usada para marcar uma classe como uma entidade
+    - ###### @Table(name="nome_tabela")
+      Essa anotação especifica explicitamente o nome da tabela
+    - ###### @Id
+      Marca a propriedade que define o identificador da entidade
+    - ###### @GeneratedValue(strategy="nome_da_estrategia")
+      Essa anotação é utilizada para informar que a geração do valor do identificador único da entidade será gerenciada pelo provedor de persistência. Essa anotação deve ser adicionada logo após a anotação **@Id**. Quando não anotamos o campo com essa opção, significa que a responsabilidade de gerar e gerenciar as chaves primárias será da aplicação.
+      O atributo **strategy** é onde adicionamos a estratégia de geração da chave primária
+    - ###### @JoinColumn
+      Especifica uma coluna para ingressar em uma associação de entidade ou coleção de elementos. Se a anotação **@JoinColumn** em si for padrão, uma única coluna de junção é assumida e os valores padrão se aplicam.
+    - ###### @ManyToOne
+      Faz o mapeamento de muitos para um
+
+
+    - ##### Codigo de demonstração da utilização dessas anotações
+      ``` java
+        @Entity
+        public class Pokemon {
+            @Id
+            @GeneratedValue(strategy = GenerationType.IDENTITY)
+            private Integer id;
+            private String nome;
+            private Integer level;
+
+            @ManyToOne
+            @JoinColumn(name = "tipo_id")
+            private Tipo tipo;
+
+            @ManyToOne
+            @JoinColumn(name = "treinador_id")
+            private Treinador treinador;
+        }
+      ```
 
 <!--EXPLICAÇÃO DA API -->
 ### Explicação da API
